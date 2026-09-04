@@ -1,8 +1,1 @@
-export default function MainPage() {
-  return (
-    <p>
-      Лорем ипсум долор сит амет, консектетур адиписцинг элит. Сед до
-      эйусмод темпор инцидидунт ут лаборе эт долоре магна аликва.
-    </p>
-  );
-}
+export { MainPage as default } from "@/src/pages/main";
