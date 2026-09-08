@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import SideMenu from "./SideMenu";
+import { SideMenu } from "./SideMenu";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,11 +18,13 @@ export const metadata: Metadata = {
   description: "Nexa Finance",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
+type RootLayoutProps = Readonly<{
   children: React.ReactNode;
-}>) {
+}>;
+
+const RootLayout = (props: RootLayoutProps) => {
+  const { children } = props;
+
   return (
     <html
       lang="en"
@@ -33,4 +35,6 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

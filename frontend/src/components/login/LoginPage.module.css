@@ -1,0 +1,13 @@
+.card {
+  max-width: 320px;
+  margin: 48px auto;
+}
+
+.title {
+  text-align: center;
+}
+
+.registerLink {
+  display: block;
+  text-align: center;
+}

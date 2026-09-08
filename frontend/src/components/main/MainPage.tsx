@@ -1,8 +1,11 @@
-export default function MainPage() {
-  return (
-    <p>
-      Лорем ипсум долор сит амет, консектетур адиписцинг элит. Сед до
-      эйусмод темпор инцидидунт ут лаборе эт долоре магна аликва.
-    </p>
-  );
-}
+"use client";
+
+import { Typography } from "antd";
+import { useTranslation } from "react-i18next";
+import "../../shared/i18n/i18n";
+
+export const MainPage = () => {
+  const { t } = useTranslation();
+
+  return <Typography.Paragraph>{t("main.text")}</Typography.Paragraph>;
+};

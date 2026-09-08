@@ -2,16 +2,25 @@
 
 import Link from "next/link";
 import { Layout, Menu } from "antd";
+import { useTranslation } from "react-i18next";
+import "../src/shared/i18n/i18n";
 import styles from "./SideMenu.module.css";
 
 const { Sider, Content } = Layout;
 
-const items = [
-  { key: "/main", label: <Link href="/main">Главная</Link> },
-  { key: "/login", label: <Link href="/login">Вход</Link> },
-];
+type SideMenuProps = {
+  children: React.ReactNode;
+};
 
-export default function SideMenu({ children }: { children: React.ReactNode }) {
+export const SideMenu = (props: SideMenuProps) => {
+  const { children } = props;
+  const { t } = useTranslation();
+
+  const items = [
+    { key: "/main", label: <Link href="/main">{t("menu.main")}</Link> },
+    { key: "/login", label: <Link href="/login">{t("menu.login")}</Link> },
+  ];
+
   return (
     <Layout className={styles.layout}>
       <Sider>
@@ -20,4 +29,4 @@ export default function SideMenu({ children }: { children: React.ReactNode }) {
       <Content>{children}</Content>
     </Layout>
   );
-}
+};
