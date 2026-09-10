@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
+import { ConfigProvider } from "antd";
 import { SideMenu } from "./SideMenu";
+import { antdTheme } from "../src/shared/theme/antdTheme";
+import "../src/shared/theme/tokens.css";
 import "./globals.css";
 
-const geistSans = Geist({
+const inter = Inter({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
+const jetBrainsMono = JetBrains_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
@@ -28,10 +31,12 @@ const RootLayout = (props: RootLayoutProps) => {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${jetBrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <SideMenu>{children}</SideMenu>
+        <ConfigProvider theme={antdTheme}>
+          <SideMenu>{children}</SideMenu>
+        </ConfigProvider>
       </body>
     </html>
   );
