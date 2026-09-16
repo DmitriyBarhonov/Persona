@@ -12,9 +12,13 @@ usersRouter.post("/", async (req, res) => {
 
   try {
     const user = await userRepository.create(email, password);
-     
-    res.status(201).json({createdAt: user.createdAt, email: user.email, id: user.id});
+
+    res
+      .status(201)
+      .json({ createdAt: user.createdAt, email: user.email, id: user.id });
   } catch (err) {
-    res.status(409).json({ error: "Пользователь с таким email уже существует" });
+    res
+      .status(409)
+      .json({ error: "Пользователь с таким email уже существует" });
   }
 });

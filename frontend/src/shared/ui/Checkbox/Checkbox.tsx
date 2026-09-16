@@ -7,8 +7,8 @@ import { forwardRef } from "react";
 
 export type CheckboxProps = AntCheckboxProps;
 
-export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>(
-  (props, ref) => <AntCheckbox ref={ref} {...props} />,
-);
+export const Checkbox = forwardRef<CheckboxRef, CheckboxProps>((props, ref) => (
+  <AntCheckbox ref={ref} {...props} />
+));
 
 Checkbox.displayName = "Checkbox";

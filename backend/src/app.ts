@@ -9,6 +9,6 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use('/echo', echoRouter)
+app.use("/echo", echoRouter);
 
 app.use("/users", usersRouter);

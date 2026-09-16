@@ -29,11 +29,7 @@ export const LoginPage = () => {
       </Typography.Title>
 
       <Form layout="vertical" onFinish={handleLogin}>
-        <Form.Item
-          label={t("login.email")}
-          name="email"
-          rules={[{ min: 5 }]}
-        >
+        <Form.Item label={t("login.email")} name="email" rules={[{ min: 5 }]}>
           <Input />
         </Form.Item>
 
