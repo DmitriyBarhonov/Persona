@@ -1,13 +1,16 @@
 .card {
-  max-width: 320px;
-  margin: 48px auto;
+  max-width: 360px;
+  margin: 64px auto;
+  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.08);
 }
 
 .title {
   text-align: center;
+  margin-bottom: 24px !important;
 }
 
 .registerLink {
   display: block;
   text-align: center;
+  margin-top: 8px;
 }

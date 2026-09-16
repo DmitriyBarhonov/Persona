@@ -1,28 +1,20 @@
 "use client";
 
-import { Button, Card, Form, Input, Typography } from "antd";
+import { Card, Form, Typography } from "antd";
 import { useTranslation } from "react-i18next";
 import "../../shared/i18n/i18n";
+import { createUser } from "../../shared/api";
+import { Button, Input, PasswordInput } from "../../shared/ui";
 import styles from "./LoginPage.module.css";
 
 type LoginFormValues = {
-  username: string;
+  email: string;
   password: string;
 };
 
-const echo = async (data: unknown) => {
-  const res = await fetch("http://localhost:4000/echo", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  });
-
-  return res.json();
-};
-
 const handleLogin = async (values: LoginFormValues) => {
-  const result = await echo(values);
-  console.log("login stub:", result);
+  const user = await createUser(values);
+  console.log("user created:", user);
 };
 
 export const LoginPage = () => {
@@ -36,19 +28,15 @@ export const LoginPage = () => {
 
       <Form layout="vertical" onFinish={handleLogin}>
         <Form.Item
-          label={t("login.username")}
-          name="username"
-          rules={[{ required: true }]}
+          label={t("login.email")}
+          name="email"
+          rules={[{ min: 5 }]}
         >
           <Input />
         </Form.Item>
 
-        <Form.Item
-          label={t("login.password")}
-          name="password"
-          rules={[{ required: true }]}
-        >
-          <Input.Password />
+        <Form.Item label={t("login.password")} name="password">
+          <PasswordInput />
         </Form.Item>
 
         <Form.Item>
