@@ -1,10 +1,10 @@
  import { prisma } from "../db/prisma.js";
-
+import bcrypt from "bcrypt";
 export const userRepository = {
-  create(email: string, password: string) {
-     
+  async create(email: string, password : string) {
+      const passwordHash = await bcrypt.hash(password, 10);
     return prisma.user.create({
-      data: { email, password },
+      data: { email, passwordHash  },
     });
   },
 
