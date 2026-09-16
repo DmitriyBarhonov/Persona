@@ -7,10 +7,12 @@
     "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
   },
   "login": {
-    "title": "Sign in",
+    "title": "Registration",
     "email": "Login",
     "password": "Password",
-    "submit": "Sign in",
-    "registerLink": "No account? Register"
+    "confirmPassword": "Confirm password",
+    "confirmPasswordMismatch": "Passwords do not match",
+    "submit": "Register",
+    "registerLink": "Already have an account? Sign in"
   }
 }

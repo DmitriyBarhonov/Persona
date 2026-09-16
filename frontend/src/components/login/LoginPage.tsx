@@ -10,10 +10,12 @@ import styles from "./LoginPage.module.css";
 type LoginFormValues = {
   email: string;
   password: string;
+  confirmPassword: string;
 };
 
 const handleLogin = async (values: LoginFormValues) => {
-  const user = await createUser(values);
+  const { email, password } = values;
+  const user = await createUser({ email, password });
   console.log("user created:", user);
 };
 
@@ -36,6 +38,26 @@ export const LoginPage = () => {
         </Form.Item>
 
         <Form.Item label={t("login.password")} name="password">
+          <PasswordInput />
+        </Form.Item>
+
+        <Form.Item
+          label={t("login.confirmPassword")}
+          name="confirmPassword"
+          dependencies={["password"]}
+          rules={[
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (!value || getFieldValue("password") === value) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(
+                  new Error(t("login.confirmPasswordMismatch")),
+                );
+              },
+            }),
+          ]}
+        >
           <PasswordInput />
         </Form.Item>
 
