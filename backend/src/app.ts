@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { echoRouter } from "./routes/echo.routes.js";
-import { usersRouter } from "./routes/users.routes.js";
+import { echoRouter, usersRouter, authRouter } from "./routes/index.js";
 
 export const app = express();
 
@@ -12,3 +11,5 @@ app.use(express.json());
 app.use("/echo", echoRouter);
 
 app.use("/users", usersRouter);
+
+app.use("/auth", authRouter);
