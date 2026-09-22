@@ -1,7 +1,8 @@
 {
   "menu": {
     "main": "Home",
-    "login": "Sign in"
+    "login": "Register",
+    "signin": "Sign in"
   },
   "main": {
     "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
@@ -14,5 +15,13 @@
     "confirmPasswordMismatch": "Passwords do not match",
     "submit": "Register",
     "registerLink": "Already have an account? Sign in"
+  },
+  "signin": {
+    "title": "Sign in",
+    "login": "Login",
+    "password": "Password",
+    "submit": "Sign in",
+    "forgotPassword": "Forgot password?",
+    "registerLink": "No account? Register"
   }
 }

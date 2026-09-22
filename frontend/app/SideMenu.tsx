@@ -18,6 +18,7 @@ export const SideMenu = (props: SideMenuProps) => {
 
   const items = [
     { key: "/main", label: <Link href="/main">{t("menu.main")}</Link> },
+    { key: "/signin", label: <Link href="/signin">{t("menu.signin")}</Link> },
     { key: "/login", label: <Link href="/login">{t("menu.login")}</Link> },
   ];
 

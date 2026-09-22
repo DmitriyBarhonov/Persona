@@ -64,7 +64,7 @@ export const LoginPage = () => {
         </Form.Item>
       </Form>
 
-      <Typography.Link href="#" className={styles.registerLink}>
+      <Typography.Link href="/signin" className={styles.registerLink}>
         {t("login.registerLink")}
       </Typography.Link>
     </Card>
