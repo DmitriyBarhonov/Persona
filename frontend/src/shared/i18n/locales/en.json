@@ -1,8 +1,7 @@
 {
   "menu": {
     "main": "Home",
-    "login": "Register",
-    "signin": "Sign in"
+    "login": "Sign in"
   },
   "main": {
     "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."

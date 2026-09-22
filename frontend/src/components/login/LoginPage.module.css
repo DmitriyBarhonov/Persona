@@ -9,8 +9,15 @@
   margin-bottom: 24px !important;
 }
 
-.registerLink {
+.forgotPassword {
+  display: block;
+  text-align: right;
+  margin-bottom: 16px;
+}
+
+.switchLink {
   display: block;
   text-align: center;
   margin-top: 8px;
+  cursor: pointer;
 }

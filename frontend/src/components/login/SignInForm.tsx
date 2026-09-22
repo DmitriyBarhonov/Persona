@@ -1,20 +1,20 @@
 "use client";
 
-import { Card, Form, Typography } from "antd";
+import { Form, Typography } from "antd";
 import { useTranslation } from "react-i18next";
-import "../../shared/i18n/i18n";
 import { Button, Input, PasswordInput } from "../../shared/ui";
-import styles from "./SignInPage.module.css";
+import styles from "./LoginPage.module.css";
 
-export const SignInPage = () => {
+type SignInFormProps = {
+  onSwitchToRegister: () => void;
+};
+
+export const SignInForm = (props: SignInFormProps) => {
+  const { onSwitchToRegister } = props;
   const { t } = useTranslation();
 
   return (
-    <Card className={styles.card}>
-      <Typography.Title level={3} className={styles.title}>
-        {t("signin.title")}
-      </Typography.Title>
-
+    <>
       <Form layout="vertical">
         <Form.Item label={t("signin.login")} name="login">
           <Input />
@@ -35,9 +35,12 @@ export const SignInPage = () => {
         </Form.Item>
       </Form>
 
-      <Typography.Link href="/login" className={styles.registerLink}>
+      <Typography.Link
+        onClick={onSwitchToRegister}
+        className={styles.switchLink}
+      >
         {t("signin.registerLink")}
       </Typography.Link>
-    </Card>
+    </>
   );
 };
