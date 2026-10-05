@@ -1,17 +1,22 @@
-# Agent rules
+# Правила агента
 
-## Plan and architecture documents
+## Планы и архитектурные документы
 
-Any planning, architecture, or design document you write as a file (e.g. `ARCHITECTURE.md`, plan write-ups, design notes) must be placed in `.plans/` at the repository root, not committed to git, and not scattered into `backend/`, `frontend/`, or other project folders.
+Любой план, архитектурный документ или дизайн-документ, который ты оформляешь файлом (например, `ARCHITECTURE.md`, черновики планов, заметки по дизайну), должен лежать в `.plans/` в корне репозитория — не коммититься в git и не разбрасываться по `backend/`, `frontend/` или другим папкам проекта.
 
-- Path: `C:\Users\govno\Desktop\prodject\persona\.plans\`
-- This folder is git-ignored (see root `.gitignore`), so files here stay local and easy to find but never end up in the repo history or PRs.
-- If such a file already exists elsewhere in the repo, move it into `.plans/` rather than leaving a copy behind.
+- Путь: `C:\Users\govno\Desktop\prodject\persona\.plans\`
+- Эта папка в `.gitignore` (см. корневой `.gitignore`), поэтому файлы там остаются локально и легко находятся, но никогда не попадают в историю репозитория или в PR.
+- Если такой файл уже существует в другом месте репозитория — перенеси его в `.plans/`, а не оставляй копию на старом месте.
 
-## Don't break the running dev server
+## Не ломать работающий dev-сервер
 
-Never run anything that touches `frontend/.next/` — deleting it, running `npm run build`, running `npm run dev`, anything — while the user's own `next dev` (Turbopack) process might be running. `next dev` and `next build` both read/write `.next` continuously and are NOT safe to run concurrently against the same `.next` directory: they will corrupt each other's Turbopack cache/manifests (Rust panics like `Failed to lookup task ids... Unable to open static sorted file`, or dev crashing with `ENOENT ... build-manifest.json`, `Cannot find module '../chunks/ssr/[turbopack]_runtime.js'`, `Compaction failed: Another write batch or compaction is already active`). This has happened twice — do not repeat it.
+Никогда не запускай ничего, что трогает `frontend/.next/` — удаление, `npm run build`, `npm run dev`, что угодно — пока у пользователя может быть запущен его собственный `next dev` (Turbopack). `next dev` и `next build` оба постоянно читают и пишут в `.next` и НЕ безопасны при параллельном запуске против одной и той же папки `.next`: они портят кэш/манифесты Turbopack друг друга (паники Rust вроде `Failed to lookup task ids... Unable to open static sorted file`, либо падение dev-сервера с `ENOENT ... build-manifest.json`, `Cannot find module '../chunks/ssr/[turbopack]_runtime.js'`, `Compaction failed: Another write batch or compaction is already active`). Это уже случалось дважды — не повторять.
 
-- **Always ask the user first** whether a dev server is currently running before running `npm run build`, `npm run dev`, or deleting `.next` in `frontend/`. Do not just check `tasklist` — a live node process doesn't tell you which of several is the dev server, and the absence of a process doesn't prove none is about to start. Ask.
-- If the user has a dev server running, don't run `npm run build` either — it is not a safe "read-only" alternative, it writes to the same `.next` and will corrupt the dev server's cache just the same. Wait until they stop it, or use `tsc --noEmit` / `eslint` for verification instead, which don't touch `.next`.
-- If `.next` deletion is truly necessary, confirm the dev server is stopped first (ask, don't assume), then delete, then let the user restart their own dev server — don't start one yourself.
+- **Всегда сначала спрашивай пользователя**, запущен ли сейчас dev-сервер, прежде чем выполнять `npm run build`, `npm run dev` или удалять `.next` в `frontend/`. Не полагайся только на проверку через `tasklist` — живой процесс node не говорит, какой именно из нескольких является dev-сервером, а отсутствие процесса не доказывает, что он не запустится через секунду. Спрашивай.
+- Если у пользователя запущен dev-сервер, не запускай и `npm run build` — это не безопасная "read-only" альтернатива, он пишет в ту же `.next` и точно так же испортит кэш dev-сервера. Дождись, пока пользователь его остановит, либо используй для проверки `tsc --noEmit` / `eslint`, которые `.next` не трогают.
+- Если удаление `.next` действительно необходимо — сначала убедись, что dev-сервер остановлен (спроси, не предполагай), затем удаляй, а дальше пусть пользователь сам перезапустит свой dev-сервер — не запускай его за него.
+
+## Стиль кода фронтенда
+
+- Деструктурируй многосоставные namespace-импорты antd (и подобные) один раз, рядом с импортами, вместо повторения точечного доступа по всему JSX: `const { Item } = Form;`, `const { Title, Link } = Typography;`, `const { Sider, Content } = Layout;` — дальше используй `<Item>`, `<Title>`, `<Sider>` и т.д. напрямую.
+- Если в файле компонента оказывается больше двух локальных типов/интерфейсов, выноси их в файл `model/types.ts` рядом (соглашение FSD), а не оставляй инлайном. Один-два локальных типа можно оставить прямо в файле компонента.
