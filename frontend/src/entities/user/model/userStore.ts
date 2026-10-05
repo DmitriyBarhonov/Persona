@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { getErrorMessage } from "../../../shared/api";
+import { getErrorMessage } from "@/src/shared/api";
 import {
   createUser,
   login,

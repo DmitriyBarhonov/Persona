@@ -3,7 +3,7 @@
 import { Card, Typography } from "antd";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import "../../shared/i18n/i18n";
+import "@/src/shared/i18n";
 import { RegisterForm } from "../../features/auth/register";
 import { SignInForm } from "../../features/auth/sign-in";
 import styles from "./LoginPage.module.css";

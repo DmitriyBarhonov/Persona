@@ -4,7 +4,7 @@ import { Form, message, Typography } from "antd";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useUserStore } from "../../../entities/user";
-import { Button, Input, PasswordInput } from "../../../shared/ui";
+import { Button, Input, PasswordInput } from "@/src/shared/ui";
 import styles from "./SignInForm.module.css";
 
 const { Item } = Form;

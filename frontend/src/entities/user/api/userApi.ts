@@ -1,4 +1,4 @@
-import { axiosInstance } from "../../../shared/api";
+import { axiosInstance } from "@/src/shared/api";
 
 export type CreateUserPayload = {
   email: string;

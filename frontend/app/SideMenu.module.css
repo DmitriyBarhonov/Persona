@@ -1,3 +1,11 @@
 .layout {
   min-height: 100%;
 }
+
+/* Навигация сверху, переключатель темы прижат к низу. */
+.siderContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}

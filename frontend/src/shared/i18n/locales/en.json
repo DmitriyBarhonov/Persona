@@ -3,6 +3,10 @@
     "main": "Home",
     "login": "Sign in"
   },
+  "theme": {
+    "light": "Light theme",
+    "dark": "Dark theme"
+  },
   "errors": {
     "generic": "Something went wrong"
   },

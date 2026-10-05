@@ -1,20 +1,13 @@
+/* Дизайн-токены для своих компонентов (CSS-модули).
+   Компоненты antd настраиваются отдельно — в antdTheme.ts. */
+
 :root {
-  --color-surface: #fcf8fa;
-  --color-surface-dim: #dcd9db;
-  --color-surface-bright: #fcf8fa;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #f6f3f5;
-  --color-surface-container: #f0edef;
-  --color-surface-container-high: #eae7e9;
-  --color-surface-container-highest: #e4e2e4;
-  --color-on-surface: #1b1b1d;
-  --color-on-surface-variant: #45464d;
-  --color-outline: #76777d;
-  --color-outline-variant: #c6c6cd;
+  --color-bg: #ffffff;
+  --color-text: #171717;
   --color-border: #e2e8f0;
 
-  --font-family-base: Inter, sans-serif;
-  --font-family-mono: "JetBrains Mono", monospace;
+  --font-family-base: var(--font-inter), sans-serif;
+  --font-family-mono: var(--font-jetbrains-mono), monospace;
 
   --font-size-display: 48px;
   --line-height-display: 56px;
@@ -46,16 +39,10 @@
   --radius-lg: 8px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-surface: #0f172a;
-    --color-surface-container-lowest: #0b1220;
-    --color-surface-container-low: #131c2e;
-    --color-surface-container: #1a2540;
-    --color-surface-container-high: #22304f;
-    --color-surface-container-highest: #2a3a5e;
-    --color-on-surface: #f3f0f2;
-    --color-on-surface-variant: #c6c6cd;
-    --color-border: #334155;
-  }
+/* Тёмную тему включает data-theme="dark" на <html> (см. themeScript.ts). */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-bg: #000000;
+  --color-text: #ededed;
+  --color-border: #424242;
 }

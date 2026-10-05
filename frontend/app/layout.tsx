@@ -1,19 +1,17 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
-import { ConfigProvider } from "antd";
 import { SideMenu } from "./SideMenu";
-import { antdTheme } from "../src/shared/theme/antdTheme";
-import "../src/shared/theme/tokens.css";
+import { ThemeProvider, themeScript } from "@/src/shared/theme";
 import "./globals.css";
 
 const inter = Inter({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: "--font-inter",
+  subsets: ["latin", "cyrillic"],
 });
 
 const jetBrainsMono = JetBrains_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
+  subsets: ["latin", "cyrillic"],
 });
 
 export const metadata: Metadata = {
@@ -29,14 +27,20 @@ const RootLayout = (props: RootLayoutProps) => {
   const { children } = props;
 
   return (
+    // suppressHydrationWarning: themeScript ставит data-theme на <html>
+    // до гидрации, и React не должен считать это расхождением.
     <html
       lang="en"
       className={`${inter.variable} ${jetBrainsMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="min-h-full flex flex-col">
-        <ConfigProvider theme={antdTheme}>
+        <ThemeProvider>
           <SideMenu>{children}</SideMenu>
-        </ConfigProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Layout, Menu } from "antd";
 import { useTranslation } from "react-i18next";
-import "../src/shared/i18n/i18n";
+import "@/src/shared/i18n";
+import { ThemeSwitcher } from "../src/features/theme/switch-theme";
 import styles from "./SideMenu.module.css";
 
 const { Sider, Content } = Layout;
@@ -15,6 +17,7 @@ type SideMenuProps = {
 export const SideMenu = (props: SideMenuProps) => {
   const { children } = props;
   const { t } = useTranslation();
+  const pathname = usePathname();
 
   const items = [
     { key: "/main", label: <Link href="/main">{t("menu.main")}</Link> },
@@ -24,7 +27,15 @@ export const SideMenu = (props: SideMenuProps) => {
   return (
     <Layout className={styles.layout}>
       <Sider>
-        <Menu theme="dark" mode="inline" items={items} />
+        <div className={styles.siderContent}>
+          <Menu
+            theme="dark"
+            mode="inline"
+            items={items}
+            selectedKeys={[pathname]}
+          />
+          <ThemeSwitcher />
+        </div>
       </Sider>
       <Content>{children}</Content>
     </Layout>
