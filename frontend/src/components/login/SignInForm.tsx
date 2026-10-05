@@ -1,9 +1,16 @@
 "use client";
 
-import { Form, Typography } from "antd";
+import { Form, message, Typography } from "antd";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useUserStore } from "../../entities/user";
 import { Button, Input, PasswordInput } from "../../shared/ui";
 import styles from "./LoginPage.module.css";
+
+type SignInFormValues = {
+  login: string;
+  password: string;
+};
 
 type SignInFormProps = {
   onSwitchToRegister: () => void;
@@ -12,10 +19,25 @@ type SignInFormProps = {
 export const SignInForm = (props: SignInFormProps) => {
   const { onSwitchToRegister } = props;
   const { t } = useTranslation();
+  const signIn = useUserStore((state) => state.signIn);
+  const error = useUserStore((state) => state.error);
+  const clearError = useUserStore((state) => state.clearError);
+
+  useEffect(() => {
+    if (error) {
+      message.error(error);
+      clearError();
+    }
+  }, [error, clearError]);
+
+  const handleSignIn = async (values: SignInFormValues) => {
+    const { login: email, password } = values;
+    await signIn({ email, password });
+  };
 
   return (
     <>
-      <Form layout="vertical">
+      <Form layout="vertical" onFinish={handleSignIn}>
         <Form.Item label={t("signin.login")} name="login">
           <Input />
         </Form.Item>
