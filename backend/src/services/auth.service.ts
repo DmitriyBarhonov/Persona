@@ -1,6 +1,18 @@
 import bcrypt from "bcrypt";
 import { userRepository } from "../repositories/user.repository.js";
 
+export const register = async (email: string, password: string) => {
+  const existing = await userRepository.findByEmail(email);
+
+  if (existing) {
+    throw new Error("EMAIL_TAKEN");
+  }
+
+  const passwordHash = await bcrypt.hash(password, 10);
+
+  return userRepository.create(email, passwordHash);
+};
+
 export const login = async (email: string, password: string) => {
   const user = await userRepository.findByEmail(email);
 
