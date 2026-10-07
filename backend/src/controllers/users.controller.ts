@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { register } from "../services/auth.service.js";
+import { toUserDto } from "../dto/user.dto.js";
 
 export const createUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -10,11 +11,7 @@ export const createUser = async (req: Request, res: Response) => {
 
   try {
     const user = await register(email, password);
-    res.status(201).json({
-      id: user.id,
-      email: user.email,
-      createdAt: user.createdAt,
-    });
+    res.status(201).json(toUserDto(user));
   } catch (err) {
     if (err instanceof Error && err.message === "EMAIL_TAKEN") {
       return res

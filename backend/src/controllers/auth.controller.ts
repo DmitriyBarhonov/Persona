@@ -1,3 +1,4 @@
+import { toUserDto } from "../dto/user.dto.js";
 import { login } from "../services/auth.service.js";
 import type { Request, Response } from "express";
 
@@ -10,7 +11,7 @@ export const loginUser = async (req: Request, res: Response) => {
 
   try {
     const user = await login(email, password);
-    res.json({ id: user.id, email: user.email, createdAt: user.createdAt });
+    res.json(toUserDto(user));
   } catch (err) {
     res.status(401).json({ error: "Неверный email или пароль" });
   }
