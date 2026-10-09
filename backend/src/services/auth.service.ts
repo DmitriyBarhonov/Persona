@@ -1,6 +1,12 @@
 import bcrypt from "bcrypt";
 import { userRepository } from "../repositories/user.repository.js";
 
+import jwt from "jsonwebtoken";
+import { config } from "../config.js";
+
+export const createToken = (userId: number) =>
+  jwt.sign({ userId }, config.jwtSecret!, { expiresIn: "7d" });
+
 export const register = async (email: string, password: string) => {
   const existing = await userRepository.findByEmail(email);
 

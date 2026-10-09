@@ -11,4 +11,8 @@ export const userRepository = {
       where: { email },
     });
   },
+
+  findById(id: number) {
+    return prisma.user.findUnique({ where: { id } });
+  },
 };
