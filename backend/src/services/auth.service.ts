@@ -4,9 +4,11 @@ import { userRepository } from "../repositories/user.repository.js";
 import jwt from "jsonwebtoken";
 import { config } from "../config.js";
 
+// Подписывает JWT секретом из config — доказательство, что токен выдал наш сервер.
 export const createToken = (userId: number) =>
   jwt.sign({ userId }, config.jwtSecret!, { expiresIn: "7d" });
 
+// Регистрация: проверяет, что email свободен, и хэширует пароль перед сохранением.
 export const register = async (email: string, password: string) => {
   const existing = await userRepository.findByEmail(email);
 
@@ -19,6 +21,7 @@ export const register = async (email: string, password: string) => {
   return userRepository.create(email, passwordHash);
 };
 
+// Сверяет пароль с хэшем из базы, не отдаёт сам хэш никуда наружу.
 export const login = async (email: string, password: string) => {
   const user = await userRepository.findByEmail(email);
 

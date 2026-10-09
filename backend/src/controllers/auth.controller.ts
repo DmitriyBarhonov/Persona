@@ -4,6 +4,7 @@ import type { Request, Response } from "express";
 
 import { userRepository } from "../repositories/user.repository.js";
 
+// Отдаёт данные текущего залогиненного юзера (требует requireAuth перед собой).
 export const getMe = async (req: Request, res: Response) => {
   const user = await userRepository.findById(req.userId!);
 
@@ -14,11 +15,13 @@ export const getMe = async (req: Request, res: Response) => {
   res.json(toUserDto(user));
 };
 
+// Стирает cookie с токеном — "выход" без похода в базу.
 export const logoutUser = (req: Request, res: Response) => {
   res.clearCookie("token");
   res.json({ ok: true });
 };
 
+// Проверяет пароль, выдаёт JWT в cookie и возвращает данные юзера.
 export const loginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body;
 

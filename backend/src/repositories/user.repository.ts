@@ -1,4 +1,6 @@
 import { prisma } from "../db/prisma.js";
+
+// Единственное место в приложении, которое знает про Prisma — остальной код работает только с этими методами.
 export const userRepository = {
   create(email: string, passwordHash: string) {
     return prisma.user.create({

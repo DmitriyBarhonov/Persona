@@ -2,6 +2,7 @@ import type { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { config } from "../config.js";
 
+// Охранник: без валидного токена в cookie дальше запрос не пускает.
 export const requireAuth = (
   req: Request,
   res: Response,
