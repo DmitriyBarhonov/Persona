@@ -6,6 +6,9 @@
   --color-text: #171717;
   --color-border: #e2e8f0;
 
+  /* Цвет звёзд на странице логина. */
+  --color-star: #0f172a;
+
   --font-family-base: var(--font-inter), sans-serif;
   --font-family-mono: var(--font-jetbrains-mono), monospace;
 
@@ -45,4 +48,6 @@
   --color-bg: #000000;
   --color-text: #ededed;
   --color-border: #424242;
+
+  --color-star: #ffffff;
 }

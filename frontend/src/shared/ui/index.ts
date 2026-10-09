@@ -3,3 +3,4 @@ export * from "./Select";
 export * from "./Checkbox";
 export * from "./Button";
 export * from "./Table";
+export * from "./StarsBackground";

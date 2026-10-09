@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import "@/src/shared/i18n";
 import { RegisterForm } from "../../features/auth/register";
 import { SignInForm } from "../../features/auth/sign-in";
+import { StarsBackground } from "@/src/shared/ui";
 import styles from "./LoginPage.module.css";
 
 const { Title, Link } = Typography;
@@ -27,16 +28,20 @@ export const LoginPage = () => {
     setMode((current) => (current === "signin" ? "register" : "signin"));
 
   return (
-    <Card className={styles.card}>
-      <Title level={3} className={styles.title}>
-        {title}
-      </Title>
+    <div className={styles.page}>
+      <StarsBackground />
 
-      {form}
+      <Card className={styles.card}>
+        <Title level={3} className={styles.title}>
+          {title}
+        </Title>
 
-      <Link onClick={toggleMode} className={styles.switchLink}>
-        {switchLinkText}
-      </Link>
-    </Card>
+        {form}
+
+        <Link onClick={toggleMode} className={styles.switchLink}>
+          {switchLinkText}
+        </Link>
+      </Card>
+    </div>
   );
 };
